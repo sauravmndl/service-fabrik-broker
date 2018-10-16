@@ -37,7 +37,7 @@ const BasePlatformManager = require('../../broker/lib/fabrik/BasePlatformManager
 
 
 class DirectorService extends BaseDirectorService {
-  constructor(guid, plan) {
+  constructor(plan, guid) {
     super(plan);
     this.guid = guid;
     this.plan = plan;
@@ -935,7 +935,7 @@ class DirectorService extends BaseDirectorService {
     const planId = options.plan_id;
     const plan = catalog.getPlan(planId);
     const context = _.get(options, 'context');
-    const directorService = new DirectorService(instanceId, plan);
+    const directorService = new DirectorService(plan, instanceId);
     return Promise
       .try(() => context ? context : directorService.platformContext)
       .then(context => directorService.assignPlatformManager(DirectorService.getPlatformManager(context.platform)))
